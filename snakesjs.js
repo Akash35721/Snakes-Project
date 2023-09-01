@@ -12,7 +12,7 @@ let snakeArr=[
     {x:13, y:15}
 ];
 food = {x:6 , y:7};    //food not an array
-
+let userName = "";
 
 
 //GAME FUNCTIONS
@@ -24,6 +24,7 @@ function main(ctime)                                       //current time
     if((ctime - lastPaintTime)/1000 < 1/speed )      //to reduce the amount of time screen gets rendered
        return;                                      //dividing by 1000 because milli sec.
     lastPaintTime=ctime;
+    
     gameEngine();           
 }
 
@@ -47,6 +48,8 @@ function isCollide(snake)
 function gameEngine()                              //to run the game
 {
  //Part 1 - updating snake array & food
+//  const userName = prompt("Please enter your name:");
+//  urname.innerHTML = "Your name is " + userName;
 
  if(isCollide(snakeArr))
  {
@@ -57,7 +60,7 @@ function gameEngine()                              //to run the game
     scoreBox.innerHTML = "Your Score : " + score;
     alert("Game Over! Press any key to play again.");
     snakeArr=[{x:13, y:15}];
-   // musicSound.play();
+  // musicSound.play();
  }
 //eaten the food so increment score & regenerate food
 
@@ -131,28 +134,41 @@ else{
 }
 window.requestAnimationFrame(main);               //better than setTimeout or setInterval
 window.addEventListener('keydown',e=>{
+    if (!userName) {
+        userName = prompt("Please enter your name:", "Guest");
+        urname.innerHTML = "Legendary, " + userName + "<br> Welcome to <br> COBRA CHASE! <br> Can you break/set a highscore? <br> Dont get Coiled Up!";
+    }
+
     inputDir = {x:0,y:1};                        //game begins
     moveSound.play();
     switch (e.key) {                               //checks which key has been pressed
         case "ArrowUp":
+        case "w" :
+        case "W" :
             console.log("Arrow Up key");
             inputDir.x= 0;
             inputDir.y= -1;
             break;
         
         case "ArrowDown":
+        case "s":
+        case "S" :
             console.log("Arrow Down key");
             inputDir.x= 0;
             inputDir.y= 1;
             break;
 
         case "ArrowLeft":
+        case "a" :
+        case "A" :
             console.log("Arrow Left key");
             inputDir.x= -1;
             inputDir.y= 0;
             break;
         
         case "ArrowRight":
+        case "d" :
+        case "D" :
             console.log("Arrow Right key");
             inputDir.x= 1;
             inputDir.y= 0;
